@@ -1,0 +1,83 @@
+fileFormatVersion: 2
+guid: 479adea5aa991df448540b80531de3bb
+timeCreated: 1469581446
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JumpInS_10_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JumpInS_10_0
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 169
+        width: 111
+        height: 531
+      alignment: 9
+      pivot: {x: 0.64, y: 0.47326544}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -49.04001, y: 279.69604}
+        - {x: -69.04001, y: 267.69604}
+        - {x: -60.04001, y: 227.69604}
+        - {x: -55.04001, y: 219.69604}
+        - {x: -48.04001, y: 213.69604}
+        - {x: -65.04001, y: 202.69604}
+        - {x: -71.04001, y: 196.69604}
+        - {x: -71.04001, y: -104.303955}
+        - {x: -59.04001, y: -251.30396}
+        - {x: 39.95999, y: -251.30396}
+        - {x: 39.95999, y: -209.30396}
+        - {x: 27.959991, y: -187.30396}
+        - {x: 28.959991, y: 227.69604}
+        - {x: 5.9599915, y: 279.69604}
+    outline: []
+  spritePackingTag: FallIns
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

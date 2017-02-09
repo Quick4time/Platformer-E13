@@ -1,0 +1,82 @@
+fileFormatVersion: 2
+guid: a7ea54ca88fc3bc48bff93b55ba019fb
+timeCreated: 1469580629
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JumpInS_6_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JumpInS_6_0
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 201
+        width: 219
+        height: 584
+      alignment: 9
+      pivot: {x: 0.41, y: 0.49999994}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 44.20999, y: 140.00003}
+        - {x: 47.20999, y: 153.00003}
+        - {x: 27.209991, y: 214.00003}
+        - {x: 129.20999, y: 255.00003}
+        - {x: 129.20999, y: 292.00003}
+        - {x: -42.79001, y: 292.00003}
+        - {x: -89.79001, y: 204.00003}
+        - {x: -89.79001, y: -53.99997}
+        - {x: -69.79001, y: -257.99997}
+        - {x: -17.790009, y: -291.99997}
+        - {x: 49.20999, y: -291.99997}
+        - {x: 6.2099915, y: 116.00003}
+        - {x: 41.20999, y: 133.00003}
+    outline: []
+  spritePackingTag: FallIns
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

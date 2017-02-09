@@ -1,0 +1,86 @@
+fileFormatVersion: 2
+guid: 871cbecc74459ed4dbe396d05527aa83
+timeCreated: 1469581171
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JumpInS_7_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JumpInS_7_0
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 169
+        width: 227
+        height: 538
+      alignment: 9
+      pivot: {x: 0.39, y: 0.47}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30.470001, y: -225.85999}
+        - {x: 19.470001, y: 88.140015}
+        - {x: 98.47, y: 134.14001}
+        - {x: 138.47, y: 199.14001}
+        - {x: 138.47, y: 258.14}
+        - {x: 59.47, y: 285.14}
+        - {x: -42.53, y: 285.14}
+        - {x: -64.53, y: 270.14}
+        - {x: -88.53, y: 187.14001}
+        - {x: -88.53, y: -71.859985}
+        - {x: -74.53, y: -241.85999}
+        - {x: -39.53, y: -252.85999}
+        - {x: 22.470001, y: -252.85999}
+        - {x: 25.470001, y: -251.85999}
+        - {x: 30.470001, y: -241.85999}
+        - {x: 25.470001, y: -238.85999}
+        - {x: 26.470001, y: -236.85999}
+    outline: []
+  spritePackingTag: FallIns
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

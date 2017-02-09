@@ -1,0 +1,84 @@
+fileFormatVersion: 2
+guid: 8c385a0d0e63efb4493db3e6b4e6919b
+timeCreated: 1469578649
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JumpInS_8_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JumpInS_8_0
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 172
+        width: 188
+        height: 496
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: -234}
+        - {x: 35, y: -232}
+        - {x: 94, y: -106}
+        - {x: 94, y: 84}
+        - {x: 48, y: 191}
+        - {x: 34, y: 248}
+        - {x: -20, y: 248}
+        - {x: -46, y: 232}
+        - {x: -94, y: 83}
+        - {x: -94, y: -17}
+        - {x: -33, y: -85}
+        - {x: -80, y: -248}
+        - {x: 34, y: -248}
+        - {x: 34, y: -246}
+        - {x: 31, y: -234}
+    outline: []
+  spritePackingTag: FallIns
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
