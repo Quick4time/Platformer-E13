@@ -7,8 +7,6 @@ public class Climb : MonoBehaviour {
 
     GameObject[] StartClimb;
     string tagStartClimb = "ClimbDestStart";
-    GameObject[] EndClimb;
-    string tagEndClimb = "ClimbDestEnd";
     float speedMoveTorLow = 1.8f;//0.84//1.8//различная скорость перемещения персонажа
     float speedMoveTorHigh = 0.84f;
     [HideInInspector]
@@ -19,13 +17,11 @@ public class Climb : MonoBehaviour {
     Player playScr;
     GameObject PlayObj;
 
-    bool GetKeyClimb = false;
     bool isMovingLow = false;
     bool isMovingHigh = false;
     bool isTransform = false;
 
-    void Start () {
-        GetKeyClimb = Input.GetKeyDown(KeyCode.Space);
+    void Start () {   
         myAnimator = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
@@ -33,20 +29,29 @@ public class Climb : MonoBehaviour {
         PlayObj = GameObject.FindGameObjectWithTag("Player");
         playScr = (Player)PlayObj.GetComponent(typeof(Player));
         StartClimb = GameObject.FindGameObjectsWithTag(tagStartClimb);
-        EndClimb = GameObject.FindGameObjectsWithTag(tagEndClimb);
     }
 		
 	void Update () {
         ClimbPos();
     }
-    IEnumerator DelayLow (float sec)
+    IEnumerator moveTo(float posX, float posY, float speed)
+    {
+        while ((transform.position.x != posX) && (transform.position.y != posY))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, new Vector2(posX, posY), speed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator Delay (float sec)
     { 
         playScr.SetAllVelStatus(true);
-        isMovingLow = true;
         yield return new WaitForSeconds(sec);
-        isMovingLow = false;
+        myAnimator.SetBool("ClimbLowGround", false);
+        myAnimator.SetBool("ClimbHigh", false);
         playScr.SetAllVelStatus(false);
     }
+    /*
     IEnumerator DelayHigh (float sec)
     {
         playScr.SetAllVelStatus(true);
@@ -54,24 +59,10 @@ public class Climb : MonoBehaviour {
         yield return new WaitForSeconds(sec);
         isMovingHigh = false;
         playScr.SetAllVelStatus(false);
-    }
+    }*/
 
     public void ClimbPos()
     {
-        GameObject NearstEndClimbPos = EndClimb[0];
-        float shortClimbEnd = Vector2.Distance(transform.position, EndClimb[0].transform.position);
-        float stepEndLow = speedMoveTorLow * Time.deltaTime;
-        float stepEndHigh = speedMoveTorHigh * Time.deltaTime;
-
-        foreach (GameObject obj in EndClimb)
-        {
-            float Distance = Vector2.Distance(transform.position, obj.transform.position);
-            if (Distance < shortClimbEnd)
-            {
-                NearstEndClimbPos = obj;
-                shortClimbEnd = Distance;
-            }
-        }
         GameObject NearstStartClimbPos = StartClimb[0];
         float shortClimbStart = Vector2.Distance(transform.position, StartClimb[0].transform.position);
         foreach (GameObject obj in StartClimb)
@@ -83,7 +74,41 @@ public class Climb : MonoBehaviour {
                 shortClimbStart = Distance;
             }
         }
-
+        if (Input.GetKeyDown(KeyCode.Space) && ray.climbLowHit && controller.isGrounded)
+        {
+            if(controller.collisions.faceDir > 0 )
+            {
+                transform.position = new Vector2(NearstStartClimbPos.transform.position.x, NearstStartClimbPos.transform.position.y);
+                myAnimator.SetBool("ClimbLowGround", true);
+                StartCoroutine(Delay(1.2f));
+                StartCoroutine(moveTo(transform.position.x + 0.61042f, transform.position.y + 1.985699f, 1.8f));
+            }
+            if (controller.collisions.faceDir < 0)
+            {
+                transform.position = new Vector2(NearstStartClimbPos.transform.position.x, NearstStartClimbPos.transform.position.y);
+                myAnimator.SetBool("ClimbLowGround", true);
+                StartCoroutine(Delay(1.2f));
+                StartCoroutine(moveTo(transform.position.x - 0.61042f, transform.position.y + 1.985699f, 1.8f));
+            }
+        }
+        if (ray.climbHighHit && !controller.isGrounded)
+        {
+            if (controller.collisions.faceDir > 0)
+            {
+                transform.position = new Vector2(NearstStartClimbPos.transform.position.x, NearstStartClimbPos.transform.position.y);
+                myAnimator.SetBool("ClimbHigh", true);
+                StartCoroutine(Delay(1.8f));
+                StartCoroutine(moveTo(transform.position.x + 0.61042f, transform.position.y + 1.985699f, 1.8f));
+            }
+            if (controller.collisions.faceDir < 0)
+            {
+                transform.position = new Vector2(NearstStartClimbPos.transform.position.x, NearstStartClimbPos.transform.position.y);
+                myAnimator.SetBool("ClimbHigh", true);
+                StartCoroutine(Delay(1.8f));
+                StartCoroutine(moveTo(transform.position.x - 0.61042f, transform.position.y + 1.985699f, 1.8f));
+            }
+        }
+        /*
         if (ray.climbHighHit && !controller.isGrounded) // !!!!!!!StuckWall mb убрать !!!!!// в конце кода возможно сделать return null.
         {
             transform.position = new Vector2(NearstStartClimbPos.transform.position.x, NearstStartClimbPos.transform.position.y);
@@ -114,7 +139,7 @@ public class Climb : MonoBehaviour {
             {   
                 myAnimator.SetBool("ClimbLowGround", false);
             }
-        /*
+        
         if (Input.GetKeyDown(KeyCode.Space) && playScr.isGrounded && ray.climbLowHit)
             {
                 StartCoroutine(Delay(1.2f));

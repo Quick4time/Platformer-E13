@@ -14,7 +14,7 @@ public class Player : MonoBehaviour ,IListener
     [SerializeField]
     private Transform[] GroundPoint;
     [SerializeField]
-    private float groundRadius;
+    public float groundRadius;
 
     public bool isGrounded;
     [SerializeField]
@@ -117,10 +117,8 @@ public class Player : MonoBehaviour ,IListener
         }
         if (velocity.y < 0)
         {
-            controller.isGrounded = false;
             myAnimator.SetBool("fall", true);
             myAnimator.ResetTrigger("jump");
-            controller.flip = false;
         }
         if (rayclimb.stuckWall)
         {
