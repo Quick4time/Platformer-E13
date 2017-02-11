@@ -19,12 +19,6 @@ public class Controller2D : RaycastController {
     public Vector3 Direction = Vector3.zero;
     public AnimationCurve AnimCurve;
 
-    //EndPositionClimb L&R
-    /*[HideInInspector]
-    public Transform EndPositionClimbRight;
-    [HideInInspector]
-    public Transform EndPositionClimbLeft;*/
-
    
     RayCastClimb rayclimb;
     GameObject rayObj;
@@ -186,14 +180,6 @@ public class Controller2D : RaycastController {
 		float directionY = Mathf.Sign (moveAmount.y); // Указывем направления по оси y.
 		float rayLength = Mathf.Abs (moveAmount.y) + skinWidth; // Длина рэйкаста
 
-        /*if (directionY > 0 && !isGrounded || directionY < 0 && !isGrounded)
-        {
-            flip = false;
-        }
-        else
-        {
-            flip = true;
-        }*/
         if (collisions.below)
         {
             isGrounded = true;

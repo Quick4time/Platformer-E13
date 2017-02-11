@@ -59,14 +59,6 @@ public class PlayerInput : MonoBehaviour
                 var IsRoolingKeyDown = Input.GetKeyDown(KeyCode.C);
                 if (IsRoolingKeyDown && !this.player.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Rool") && controller.collisions.below && player.directionalInput.x != 0)
                 {
-                    /*if (controller.collisions.faceDir > 0)
-                    {
-                        player.velocity.x = player.roolspeed;
-                    }
-                    else
-                    {
-                        player.velocity.x = -player.roolspeed;
-                    }*/
                     roolState = RoolState.Rooling;
                     controller.rool = true;
                     controller.flip = false;
@@ -96,17 +88,6 @@ public class PlayerInput : MonoBehaviour
                 }
                 break;
         }
-        /*if (Input.GetKeyDown(KeyCode.C) && !this.player.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Rool") && controller.collisions.below)
-        {
-            controller.rool = true;
-            controller.flip = false;
-            player.myAnimator.SetBool("rool", true);
-        }
-        else if (!this.player.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Rool"))
-        {
-            controller.rool = false;
-            player.myAnimator.SetBool("rool", false);
-        }*/
     }
 }
 

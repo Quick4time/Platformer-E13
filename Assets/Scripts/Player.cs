@@ -63,15 +63,6 @@ public class Player : MonoBehaviour ,IListener
     int wallDirX;
     public bool canMove = true;
 
-    //string _ClimbDestStart = "ClimbDestStart";
-    //string _ClimbDestEnd = "ClimbEndStart";
-
-    //GameObject[] ClimbStart;
-    //GameObject[] ClimbEnd;
-
-    // переменные для movetorwards
-    //float speedMove = 0.2f;
-
     RayCastClimb rayclimb;
     GameObject rayObj;
 
@@ -85,8 +76,6 @@ public class Player : MonoBehaviour ,IListener
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2); // расчет гравитации по отношению к maxJumpHeight и timeTojumpApex. 
         print("Gravity " + gravity + "MaxjumpHeight " + maxJumpHeight + "time To Jump Apex " + timeToJumpApex);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        //ClimbStart = GameObject.FindGameObjectsWithTag(_ClimbDestStart);
-        //ClimbEnd = GameObject.FindGameObjectsWithTag(_ClimbDestEnd);
         //minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight); 
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
         rayclimb = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
@@ -211,101 +200,7 @@ public class Player : MonoBehaviour ,IListener
         }
     }
 
-    /*
-    public void OnJumpInputUp()
-    {
-        if (velocity.y > minJumpVelocity && isGrounded)
-        {
-            velocity.y = minJumpVelocity;
-        }
-    }
-    
-    /*IEnumerator DelayTransformHigh (float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        transform.position = Vector2.MoveTowards (transform.position, ClimbEnd[0].transform.position, 2f);
-        myAnimator.SetBool("Climb", false);
-    }
-    /*IEnumerator DelayTransformLow (float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        transform.position = Vector2.MoveTowards(transform.position, ClimbEnd[0].transform.position, 2f);
-        myAnimator.SetBool("ClimbLow", false);
-    }
-
-    IEnumerator AnimationDelay(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        SetAllVelStatus(false);
-    }*/
-
-    /*public void ClimbPos ()
-    {
-        if ( rayclimb.climbHighHit && !isGrounded) // !!!!!!!StuckWall mb убрать!!!!!
-        {
-            if (controller.collisions.faceDir > 0)
-            {
-                Debug.Log("col_air_right_high");
-                //SetAllVelStatus(true);
-                //transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 3.1f);
-                //StartCoroutine(AnimationDelay(2.3f));
-                //StartCoroutine(DelayTransformHigh(2.3f));
-                //transform.position = new Vector2 (ClimbStart[0].transform.position.x, ClimbStart[0].transform.position.y);
-                //myAnimator.SetBool("Climb", true);
-            }
-            if (controller.collisions.faceDir < 0)
-            {
-                Debug.Log("col_air_left_high");
-                //transform.position = new Vector2(transform.position.x - 0.5f, transform.position.y + 3.1f);
-                //print("col_left");
-                //SetAllVelStatus(true);
-                //StartCoroutine(AnimationDelay(0.1f));
-                //myAnimator.SetBool("fall", true); // оптимизировать.
-            }           
-        }
-
-        if ( rayclimb.climbLowHit)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            {
-                if (controller.collisions.faceDir > 0)
-                {
-                    Debug.Log("col_right_low_space");
-                    //transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 2f);
-                    //print("col_right");
-                    //SetAllVelStatus(true);
-                    //StartCoroutine(AnimationDelay(0.1f));
-                }
-                if (controller.collisions.faceDir < 0)
-                {
-                    Debug.Log("col_left_low_space");
-                    //transform.position = new Vector2(transform.position.x - 0.5f, transform.position.y + 2f);
-                    //print("col_left");
-                    //SetAllVelStatus(true);
-                    //StartCoroutine(AnimationDelay(0.1f));
-                }   
-             }
-            if (!isGrounded)
-            {
-                if (controller.collisions.faceDir > 0)
-                {
-                    Debug.Log("col_right_air_low");
-                    //transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 2f);
-                    //SetAllVelStatus(true);
-                    //print("col_air_right");
-                    //StartCoroutine(AnimationDelay(0.1f));
-                }
-                if (controller.collisions.faceDir < 0)
-                {
-                    Debug.Log("col_left_air_low");
-                    //transform.position = new Vector2(transform.position.x - 0.5f, transform.position.y + 2f);
-                    //SetAllVelStatus(true);
-                    //print("col_air_left");
-                    //StartCoroutine(AnimationDelay(0.1f));
-                }
-            }
-        }
-    }*/
+   
     #region Велосити статус
     public void SetAllVelStatus(bool disable) // отключение коллайдеров.
     {
