@@ -16,6 +16,14 @@ public class Player : MonoBehaviour ,IListener
     [SerializeField]
     public float groundRadius;
 
+    [SerializeField]
+    private Transform[] CrouchPoint;
+    [SerializeField]
+    private float crouchPointRadius;
+    [SerializeField]
+    private LayerMask WhatIsRoof;
+    public bool isCrouched;
+
     public bool isGrounded;
     [SerializeField]
     private LayerMask WhatIsGround;
@@ -63,8 +71,8 @@ public class Player : MonoBehaviour ,IListener
     int wallDirX;
     public bool canMove = true;
 
-    RayCastClimb rayclimb;
-    GameObject rayObj;
+    private RayCastClimb rayclimb;
+    private GameObject rayObj;
 
     //public BoxCollider2D b;
     void Start()
@@ -106,14 +114,22 @@ public class Player : MonoBehaviour ,IListener
         }
         if (velocity.y < 0)
         {
+            directionalInput.x = 0;
             myAnimator.SetBool("fall", true);
             myAnimator.ResetTrigger("jump");
         }
-        if (rayclimb.stuckWall)
+        if (rayclimb.stuckWall && controller.collisions.faceDir < 0)
         {
             velocity.x = 0;
+            controller.collisions.left = true;
         }
-        myAnimator.SetFloat("speed", Mathf.Abs(velocity.x));
+        else if (rayclimb.stuckWall && controller.collisions.faceDir > 0)
+        {
+            velocity.x = 0 ;
+            controller.collisions.right = true;
+        }
+
+            myAnimator.SetFloat("speed", Mathf.Abs(velocity.x));
     }
 
     public void OnEvent (EVENT_TYPE Event_type, Component Sender, object Param = null)
@@ -257,6 +273,7 @@ public class Player : MonoBehaviour ,IListener
     }*/
     void FixedUpdate ()
     {
+        isCrouched = IsCrouch();
         HandleLayers();
         //HandleWallSliding();
         isGrounded = IsGrounded();
@@ -281,6 +298,32 @@ public class Player : MonoBehaviour ,IListener
             }
         }
         return false;
+    }
+    public bool IsCrouch()
+    {
+        if (crouch)
+        {
+            foreach (Transform point in CrouchPoint)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, crouchPointRadius, WhatIsRoof);
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (colliders[i].gameObject != gameObject)
+                    {
+                        crouch = false;
+                        return false;
+                    }
+                }
+            }
+            
+        }
+        return false;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
+        Gizmos.DrawSphere(CrouchPoint[0].transform.position, 0.4f);
     }
     private void HandleLayers()
     {

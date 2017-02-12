@@ -20,16 +20,15 @@ public class Controller2D : RaycastController {
     public AnimationCurve AnimCurve;
 
    
-    RayCastClimb rayclimb;
-    GameObject rayObj;
+    private RayCastClimb rayclimb;
+    private GameObject rayObj;
 
     public override void Start() {
+        myAnimator = GetComponent<Animator>();
         base.Start ();
         collisions.faceDir = 1;
-        GetComponent<SpriteRenderer>().flipX = false;
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
         rayclimb = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
-        myAnimator = GetComponent<Animator>();
     }
 	public void Move(Vector2 moveAmount, bool standingOnPlatform) {
 		Move (moveAmount, Vector2.zero, standingOnPlatform);
@@ -70,7 +69,7 @@ public class Controller2D : RaycastController {
 
     void Flipp()
     {
-            if (collisions.faceDir > 0 && flip)
+            if (collisions.faceDir > 0 && Input.GetAxisRaw("Horizontal") > 0 && flip)
             {
                 rayclimb.rayHighStart.transform.localPosition = new Vector2(0.4f, 2.5f);
                 rayclimb.rayHighEnd.transform.localPosition = new Vector2(1.3f, 2.5f);
@@ -83,7 +82,7 @@ public class Controller2D : RaycastController {
                 rayclimb.highStuckRayEnd.transform.localPosition = new Vector2(0.772f, 1.811f);
                 GetComponent<SpriteRenderer>().flipX = false;
             }
-                if (collisions.faceDir < 0 && flip)
+                if (collisions.faceDir < 0 && Input.GetAxisRaw("Horizontal") < 0 && flip)
             {
                 rayclimb.rayHighStart.transform.localPosition = new Vector2(-0.4f, 2.5f);
                 rayclimb.rayHighEnd.transform.localPosition = new Vector2(-1.3f, 2.5f);

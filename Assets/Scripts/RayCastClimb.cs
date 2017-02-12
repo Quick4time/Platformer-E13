@@ -19,9 +19,11 @@ public class RayCastClimb : MonoBehaviour {
 
     LayerMask stuck;
     LayerMask climb;
+    LayerMask crouch;
 
     void Start ()
     {
+        crouch = LayerMask.GetMask("Obstacle");
         stuck = LayerMask.GetMask("Default", "Obstacle");
         climb = LayerMask.GetMask("RayClimb");
     }
@@ -42,7 +44,7 @@ public class RayCastClimb : MonoBehaviour {
         Debug.DrawLine(StartRayStuck.position, medStuckRayEnd.position, Color.yellow);
         Debug.DrawLine(StartRayStuck.position, lowStuckRayEnd.position, Color.yellow);
         stuckWall = Physics2D.Linecast(StartRayStuck.position, highStuckRayEnd.position, stuck) || Physics2D.Linecast(StartRayStuck.position, medStuckRayEnd.position, stuck) || Physics2D.Linecast(StartRayStuck.position, lowStuckRayEnd.position, stuck);
-
+        
         /*Debug.DrawLine(StartDir.position, EndDirleft.position, Color.red);
         Debug.DrawLine(StartDir.position, EndDirright.position, Color.red);
         left = Physics2D.Linecast(StartDir.position, EndDirleft.position, stuck);

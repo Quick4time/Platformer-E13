@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
                 player.crouch = true;
                 player.Speed = 2;
             }
-            else if (!player.crouch)
+            else if (!player.crouch && !player.isCrouched)
             {
                 player.myAnimator.SetBool("Crouch", false);
                 player.crouch = false;

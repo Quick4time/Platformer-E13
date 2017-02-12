@@ -11,11 +11,11 @@ public class Climb : MonoBehaviour {
     float speedMoveTorHigh = 0.84f;
     [HideInInspector]
     public Animator myAnimator;
-    Controller2D controller;
-    RayCastClimb ray;
-    GameObject rayObj;
-    Player playScr;
-    GameObject PlayObj;
+    private Controller2D controller;
+    private RayCastClimb ray;
+    private GameObject rayObj;
+    private Player playScr;
+    private GameObject PlayObj;
 
     bool isMovingLow = false;
     bool isMovingHigh = false;
@@ -24,11 +24,11 @@ public class Climb : MonoBehaviour {
     void Start () {   
         myAnimator = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
-        rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        ray = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
+        StartClimb = GameObject.FindGameObjectsWithTag(tagStartClimb);
         PlayObj = GameObject.FindGameObjectWithTag("Player");
         playScr = (Player)PlayObj.GetComponent(typeof(Player));
-        StartClimb = GameObject.FindGameObjectsWithTag(tagStartClimb);
+        rayObj = GameObject.FindGameObjectWithTag("Triggers");
+        ray = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
     }
 		
 	void Update () {
