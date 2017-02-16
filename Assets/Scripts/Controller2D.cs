@@ -10,7 +10,7 @@ public class Controller2D : RaycastController {
     public bool jump;
     public bool rool;
     public bool isGrounded;
-    public float maxSlopeAngle = 80; // максимальный градус подъема.
+    public float maxSlopeAngle = 80.0f; // максимальный градус подъема.
     public CollisionInfo collisions;
 	[HideInInspector]
 	public Vector2 playerInput;

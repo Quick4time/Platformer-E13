@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
 
     public RoolState roolState;
     public float roolTimer;
-    public float roolRange = 3;
+    public float roolRange = 3.0f;
 
     void Start()
     {       

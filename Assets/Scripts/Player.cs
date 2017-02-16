@@ -30,10 +30,10 @@ public class Player : MonoBehaviour ,IListener
     //public bool cantmove;
 
     public int FallBoundary = -20;
-    public float maxJumpHeight = 6; // максимальная высота прыжка.
-    public float minJumpHeight = 6; // минимальная высота прыжка.
-    public float timeToJumpApex = .2f; // за сколько времени игрок достигнет высшей точки прыжка.
-    float accelerationTimeAirborne = 4f; // ускорение в воздухе при изменении направления по оси x. (Важно!!!) 
+    public float maxJumpHeight = 6.0f; // максимальная высота прыжка.
+    public float minJumpHeight = 6.0f; // минимальная высота прыжка.
+    public float timeToJumpApex = 0.2f; // за сколько времени игрок достигнет высшей точки прыжка.
+    float accelerationTimeAirborne = 4.0f; // ускорение в воздухе при изменении направления по оси x. (Важно!!!) 
     public float accelerationTimeGrounded = 0.13f; // Ускорение на земле при изменении направления по оси x. (Важно!!!) заторможеннось придвежении.
     public bool crouch = false;
     
@@ -54,8 +54,8 @@ public class Player : MonoBehaviour ,IListener
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
 
-    public float wallSlideSpeedMax = 3;
-    public float wallStickTime = .25f;
+    public float wallSlideSpeedMax = 3.0f;
+    public float wallStickTime = 0.25f;
     float timeToWallUnstick;
 
     float gravity;
