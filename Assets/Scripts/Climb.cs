@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+[RequireComponent(typeof(RaycastManager))]
+[RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Controller2D))]
 public class Climb : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class Climb : MonoBehaviour {
     [HideInInspector]
     public Animator myAnimator;
     private Controller2D controller;
-    private RayCastClimb ray;
+    private RaycastManager ray;
     private GameObject rayObj;
     private Player playScr;
     private GameObject PlayObj;
@@ -21,14 +22,15 @@ public class Climb : MonoBehaviour {
     bool isMovingHigh = false;
     bool isTransform = false;
 
-    void Start () {   
+    void Start () {
+        ray = GetComponent<RaycastManager>();   
         myAnimator = GetComponent<Animator>();
         controller = GetComponent<Controller2D>();
         StartClimb = GameObject.FindGameObjectsWithTag(tagStartClimb);
         PlayObj = GameObject.FindGameObjectWithTag("Player");
         playScr = (Player)PlayObj.GetComponent(typeof(Player));
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        ray = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
+        ray = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
     }
 		
 	void Update () {

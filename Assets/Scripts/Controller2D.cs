@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+[RequireComponent(typeof(RaycastManager))]
 public class Controller2D : RaycastController {
 
 
@@ -18,20 +18,24 @@ public class Controller2D : RaycastController {
 
     public Vector3 Direction = Vector3.zero;
     public AnimationCurve AnimCurve;
-
+    //public bool m_FacingRight = true;
    
-    private RayCastClimb rayclimb;
+    private RaycastManager rayclimb;
     private GameObject rayObj;
 
+    private Player _player;
+    private GameObject _gmPlayer;
+
     public override void Start() {
+        rayclimb = GetComponent<RaycastManager>();
         myAnimator = GetComponent<Animator>();
         base.Start ();
         collisions.faceDir = 1;
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        rayclimb = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
+        rayclimb = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
     }
 	public void Move(Vector2 moveAmount, bool standingOnPlatform) {
-		Move (moveAmount, Vector2.zero, standingOnPlatform);
+		Move (moveAmount, standingOnPlatform);
 	}
 
     public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false) {
@@ -39,6 +43,7 @@ public class Controller2D : RaycastController {
 		collisions.Reset ();
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
+
 
         if (moveAmount.y < 0)
         {
@@ -58,17 +63,30 @@ public class Controller2D : RaycastController {
 
 		transform.Translate (moveAmount);
 
-		if (standingOnPlatform) {
+        if (standingOnPlatform) {
 			collisions.below = true;
 		}      
 }
-    void Update()
+    void FixedUpdate ()
     {
-        Flipp();
+        Flip();
+
+        /*if (collisions.faceDir > 0 && !m_FacingRight)
+        {
+            Flip();
+        }
+        else if (collisions.faceDir < 0 && m_FacingRight)
+        {
+            Flip();
+        }*/
     }
 
-    void Flipp()
+    private void Flip()
     {
+        /*m_FacingRight = !m_FacingRight; // Попробовать пофиксить.
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;*/
             if (collisions.faceDir > 0 && Input.GetAxisRaw("Horizontal") > 0 && flip)
             {
                 rayclimb.rayHighStart.transform.localPosition = new Vector2(0.4f, 2.5f);
@@ -94,7 +112,7 @@ public class Controller2D : RaycastController {
                 rayclimb.medStuckRayEnd.transform.localPosition = new Vector2(-0.772f, 0f);
                 rayclimb.highStuckRayEnd.transform.localPosition = new Vector2(-0.772f, 1.811f);
                 GetComponent<SpriteRenderer>().flipX = true;
-        }           
+        }          
     }
 
     void HorizontalCollisions(ref Vector2 moveAmount) // тоже самое что и VerticalCollision за исключением оси с Y на X.

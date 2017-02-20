@@ -33,7 +33,7 @@ public class Player : MonoBehaviour ,IListener
     public float maxJumpHeight = 6.0f; // максимальная высота прыжка.
     public float minJumpHeight = 6.0f; // минимальная высота прыжка.
     public float timeToJumpApex = 0.2f; // за сколько времени игрок достигнет высшей точки прыжка.
-    float accelerationTimeAirborne = 4.0f; // ускорение в воздухе при изменении направления по оси x. (Важно!!!) 
+    float accelerationTimeAirborne = 0.3f; // ускорение в воздухе при изменении направления по оси x. (Важно!!!) 
     public float accelerationTimeGrounded = 0.13f; // Ускорение на земле при изменении направления по оси x. (Важно!!!) заторможеннось придвежении.
     public bool crouch = false;
     
@@ -71,22 +71,23 @@ public class Player : MonoBehaviour ,IListener
     int wallDirX;
     public bool canMove = true;
 
-    private RayCastClimb rayclimb;
+    private RaycastManager rayclimb;
     private GameObject rayObj;
 
     //public BoxCollider2D b;
     void Start()
     {
         //b = this.GetComponent<BoxCollider2D>();
+        rayclimb = GetComponent<RaycastManager>();
         myRidgidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<Controller2D>();
         myAnimator = GetComponent<Animator>();
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2); // расчет гравитации по отношению к maxJumpHeight и timeTojumpApex. 
-        print("Gravity " + gravity + "MaxjumpHeight " + maxJumpHeight + "time To Jump Apex " + timeToJumpApex);
+        print("Gravity: " + gravity + ". MaxjumpHeight: " + maxJumpHeight + ". Time To Jump Apex:" + timeToJumpApex);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         //minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight); 
         rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        rayclimb = (RayCastClimb)rayObj.GetComponent(typeof(RayCastClimb));
+        rayclimb = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
         EventManager.Instance.AddListener(EVENT_TYPE.SPEED_CHANGE, this);
     }
 
@@ -97,13 +98,19 @@ public class Player : MonoBehaviour ,IListener
 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
-            if (controller.collisions.above || controller.collisions.below) // если происходит столкновение с нижней или верхней поверхностью.
+        /*
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            if (controller.collisions.slidingDownMaxSlope)
+            myRidgidbody.velocity = new Vector2(2 * velocity.x, 0); 
+        }
+        */
+        if (controller.collisions.above || controller.collisions.below) // если происходит столкновение с нижней или верхней поверхностью.
+            {
+       if (controller.collisions.slidingDownMaxSlope)
             {
                 velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
             }
-            else
+      else
             {
                 velocity.y = 0;
             }

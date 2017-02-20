@@ -63,7 +63,7 @@ public class PlayerInput : MonoBehaviour
                     controller.rool = true;
                     controller.flip = false;
                     player.myAnimator.SetBool("rool", true);
-                    player.accelerationTimeGrounded = 4f;
+                    player.accelerationTimeGrounded = 0.3f;
                     player.Speed = 0;
                 }
                 break;
