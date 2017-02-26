@@ -12,25 +12,26 @@ public class Climb : MonoBehaviour {
     float speedMoveTorHigh = 0.84f;
     [HideInInspector]
     public Animator myAnimator;
+    private RaycastManager raycastManager;
     private Controller2D controller;
-    private RaycastManager ray;
-    private GameObject rayObj;
     private Player playScr;
     private GameObject PlayObj;
+    //RaycastManager raycastManager;
+    //GameObject raycastObj;
 
     bool isMovingLow = false;
     bool isMovingHigh = false;
     bool isTransform = false;
 
-    void Start () {
-        ray = GetComponent<RaycastManager>();   
+    void Start () {  
         myAnimator = GetComponent<Animator>();
+        //raycastObj = GameObject.FindGameObjectWithTag("Triggers");
+        //raycastManager = (RaycastManager)raycastObj.GetComponent(typeof(RaycastManager));
+        raycastManager = RaycastManager.instance;
         controller = GetComponent<Controller2D>();
         StartClimb = GameObject.FindGameObjectsWithTag(tagStartClimb);
         PlayObj = GameObject.FindGameObjectWithTag("Player");
         playScr = (Player)PlayObj.GetComponent(typeof(Player));
-        rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        ray = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
     }
 		
 	void Update () {
@@ -76,7 +77,7 @@ public class Climb : MonoBehaviour {
                 shortClimbStart = Distance;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && ray.climbLowHit && controller.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && raycastManager.climbLowHit && controller.isGrounded) // ОШИБКА!!!
         {
             if(controller.collisions.faceDir > 0 )
             {
@@ -93,7 +94,7 @@ public class Climb : MonoBehaviour {
                 StartCoroutine(moveTo(transform.position.x - 0.61042f, transform.position.y + 1.985699f, 1.8f));
             }
         }
-        if (ray.climbHighHit && !controller.isGrounded)
+        if (raycastManager.climbHighHit && !controller.isGrounded) // ОШИБКА!!!
         {
             if (controller.collisions.faceDir > 0)
             {

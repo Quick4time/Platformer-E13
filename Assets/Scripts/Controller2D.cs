@@ -15,24 +15,29 @@ public class Controller2D : RaycastController {
 	[HideInInspector]
 	public Vector2 playerInput;
     public bool flip;
+    private RaycastManager raycastManager;
+    private GameObject Triggers;
+    //RaycastManager raycastManager;
+    //GameObject raycastObj;
 
     public Vector3 Direction = Vector3.zero;
     public AnimationCurve AnimCurve;
-    //public bool m_FacingRight = true;
+ 
+    private bool m_FacingRight = true;
    
-    private RaycastManager rayclimb;
-    private GameObject rayObj;
-
     private Player _player;
     private GameObject _gmPlayer;
 
     public override void Start() {
-        rayclimb = GetComponent<RaycastManager>();
+        Triggers = GameObject.FindGameObjectWithTag("Triggers");
+        raycastManager = RaycastManager.instance;
+        //raycastObj = GameObject.FindGameObjectWithTag("Triggers");
+        //raycastManager = (RaycastManager)raycastObj.GetComponent(typeof(RaycastManager));
+        _gmPlayer = GameObject.FindGameObjectWithTag("Player");
+        _player = (Player)_gmPlayer.GetComponent(typeof(Player));
         myAnimator = GetComponent<Animator>();
         base.Start ();
         collisions.faceDir = 1;
-        rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        rayclimb = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
     }
 	public void Move(Vector2 moveAmount, bool standingOnPlatform) {
 		Move (moveAmount, standingOnPlatform);
@@ -69,50 +74,25 @@ public class Controller2D : RaycastController {
 }
     void FixedUpdate ()
     {
-        Flip();
-
-        /*if (collisions.faceDir > 0 && !m_FacingRight)
+        //Flip();
+        if (_player.directionalInput.x > 0 && !m_FacingRight && flip)
         {
             Flip();
+            GetComponent<SpriteRenderer>().flipX = false;
         }
-        else if (collisions.faceDir < 0 && m_FacingRight)
+        else if (_player.directionalInput.x < 0 && m_FacingRight && flip)
         {
             Flip();
-        }*/
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     private void Flip()
     {
-        /*m_FacingRight = !m_FacingRight; // Попробовать пофиксить.
-        Vector3 theScale = transform.localScale;
+        m_FacingRight = !m_FacingRight;
+        Vector3 theScale = Triggers.transform.localScale;
         theScale.x *= -1;
-        transform.localScale = theScale;*/
-            if (collisions.faceDir > 0 && Input.GetAxisRaw("Horizontal") > 0 && flip)
-            {
-                rayclimb.rayHighStart.transform.localPosition = new Vector2(0.4f, 2.5f);
-                rayclimb.rayHighEnd.transform.localPosition = new Vector2(1.3f, 2.5f);
-
-                rayclimb.rayLowStart.transform.localPosition = new Vector2(0.3f, -0.43f);
-                rayclimb.rayLowEnd.transform.localPosition = new Vector2(1.3f, -0.43f);
-
-                rayclimb.lowStuckRayEnd.transform.localPosition = new Vector2(0.772f, -2.13f);
-                rayclimb.medStuckRayEnd.transform.localPosition = new Vector2(0.772f, 0f);
-                rayclimb.highStuckRayEnd.transform.localPosition = new Vector2(0.772f, 1.811f);
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-                if (collisions.faceDir < 0 && Input.GetAxisRaw("Horizontal") < 0 && flip)
-            {
-                rayclimb.rayHighStart.transform.localPosition = new Vector2(-0.4f, 2.5f);
-                rayclimb.rayHighEnd.transform.localPosition = new Vector2(-1.3f, 2.5f);
-
-                rayclimb.rayLowStart.transform.localPosition = new Vector2(-0.3f, -0.43f);
-                rayclimb.rayLowEnd.transform.localPosition = new Vector2(-1.3f, -0.43f);
-
-                rayclimb.lowStuckRayEnd.transform.localPosition = new Vector2(-0.772f, -2.13f);
-                rayclimb.medStuckRayEnd.transform.localPosition = new Vector2(-0.772f, 0f);
-                rayclimb.highStuckRayEnd.transform.localPosition = new Vector2(-0.772f, 1.811f);
-                GetComponent<SpriteRenderer>().flipX = true;
-        }          
+        Triggers.transform.localScale = theScale;     
     }
 
     void HorizontalCollisions(ref Vector2 moveAmount) // тоже самое что и VerticalCollision за исключением оси с Y на X.
@@ -120,7 +100,7 @@ public class Controller2D : RaycastController {
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs (moveAmount.x) + skinWidth;
         // Если будут проблемы с остановкой у стены убрать комментарий.       
-        if (rayclimb.stuckWall)
+        if (raycastManager.stuckWall) // ОШИБКА !!!!!!
         {
             moveAmount.x = 0;
             directionX = 0;
@@ -232,7 +212,6 @@ public class Controller2D : RaycastController {
                 isGrounded = true;
                 myAnimator.ResetTrigger("jump");
                 myAnimator.SetBool("fall", false);
-
             }
 			if (hit) {
 				if (hit.collider.tag == "Through") {

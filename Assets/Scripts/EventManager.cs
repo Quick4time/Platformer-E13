@@ -32,11 +32,6 @@ public class EventManager : MonoBehaviour {
             DestroyImmediate(this);
         }
     }
-    void Start()
-    {
-
-    }
-
 
     public void AddListener (EVENT_TYPE Event_Type, IListener Listener)
     {

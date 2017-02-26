@@ -7,7 +7,9 @@ public class Player : MonoBehaviour ,IListener
 {
     //public Transform target;
     //public Transform climbStartR, climbEndR, ClimbStartL, ClimbEndL;
-
+    private RaycastManager raycastManager;
+    //RaycastManager raycastManager;
+    //GameObject raycastObj;
     private Rigidbody2D myRidgidbody;
     [HideInInspector]
     public Animator myAnimator;
@@ -47,7 +49,6 @@ public class Player : MonoBehaviour ,IListener
         }
     }
     private int _speed = 6;
-    public int roolspeed = 1;
 
     
     public Vector2 wallJumpClimb;
@@ -71,14 +72,15 @@ public class Player : MonoBehaviour ,IListener
     int wallDirX;
     public bool canMove = true;
 
-    private RaycastManager rayclimb;
-    private GameObject rayObj;
+
 
     //public BoxCollider2D b;
     void Start()
     {
+        //raycastObj = GameObject.FindGameObjectWithTag("Triggers");
+        //raycastManager = (RaycastManager)raycastObj.GetComponent(typeof(RaycastManager));
+        raycastManager = RaycastManager.instance;
         //b = this.GetComponent<BoxCollider2D>();
-        rayclimb = GetComponent<RaycastManager>();
         myRidgidbody = GetComponent<Rigidbody2D>();
         controller = GetComponent<Controller2D>();
         myAnimator = GetComponent<Animator>();
@@ -86,8 +88,7 @@ public class Player : MonoBehaviour ,IListener
         print("Gravity: " + gravity + ". MaxjumpHeight: " + maxJumpHeight + ". Time To Jump Apex:" + timeToJumpApex);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         //minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight); 
-        rayObj = GameObject.FindGameObjectWithTag("Triggers");
-        rayclimb = (RaycastManager)rayObj.GetComponent(typeof(RaycastManager));
+ 
         EventManager.Instance.AddListener(EVENT_TYPE.SPEED_CHANGE, this);
     }
 
@@ -120,17 +121,16 @@ public class Player : MonoBehaviour ,IListener
             Debug.Log("you are dead");
         }
         if (velocity.y < 0)
-        {
-            directionalInput.x = 0;
+        {    
             myAnimator.SetBool("fall", true);
             myAnimator.ResetTrigger("jump");
         }
-        if (rayclimb.stuckWall && controller.collisions.faceDir < 0)
+        if (raycastManager.stuckWall && controller.collisions.faceDir < 0)
         {
             velocity.x = 0;
             controller.collisions.left = true;
         }
-        else if (rayclimb.stuckWall && controller.collisions.faceDir > 0)
+        else if (raycastManager.stuckWall && controller.collisions.faceDir > 0)
         {
             velocity.x = 0 ;
             controller.collisions.right = true;
@@ -234,7 +234,7 @@ public class Player : MonoBehaviour ,IListener
                 gravity = gravity - gravity;
                 canMove = false;
                 print("true");
-                rayclimb.stuckWall = false;
+                //raycastManager.stuckWall = false;
             }
             if (!disable)
             {
@@ -322,7 +322,6 @@ public class Player : MonoBehaviour ,IListener
                     }
                 }
             }
-            
         }
         return false;
     }
